@@ -3,12 +3,32 @@ import { fetchWeatherData } from "./weatherApi";
 
 const WeatherDashboard = () => {
   //state for bringing data into our dashboard when user needs it
-  const [city, setCity] = useState<String>("");
+  const [city, setCity] = useState<string>("");
   const [weather, setWeather] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [erro, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-  return <div>WeatherDashboard</div>;
+  //function for user form submission
+  const handleSearch = async (event: React.FormEvent) => {
+    event.preventDefault();
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const data = await fetchWeatherData(city);
+      setWeather(data);
+    } catch (error) {
+      setError("Failed to fetch weather data");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return;
+  <div>
+    <h1>WeatherDashboard</h1>
+  </div>;
 };
 
 export default WeatherDashboard;
