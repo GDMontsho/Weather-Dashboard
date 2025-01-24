@@ -25,10 +25,14 @@ const WeatherDashboard = () => {
     }
   };
 
-  return;
-  <div>
-    <h1>WeatherDashboard</h1>
-  </div>;
+  return (
+    <div>
+      {/*Dashboard header*/}
+      <h1>WeatherDashboard</h1>
+      {/*form for submiting user searches*/}
+      <form onSubmit={handleSearch}></form>
+    </div>
+  );
 };
 
 export default WeatherDashboard;
