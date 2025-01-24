@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { fetchWeatherData } from "./weatherApi";
+import { Box } from "@mui/material";
 
 const WeatherDashboard = () => {
   //state for bringing data into our dashboard when user needs it
@@ -26,9 +27,20 @@ const WeatherDashboard = () => {
   };
 
   return (
-    <div>
+    <Box
+      sx={{
+        minHeight: "100vh",
+        minWidth: "100vw",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+        padding: "5px",
+      }}
+    >
       {/*Dashboard header*/}
-      <h1>WeatherDashboard</h1>
+      <h1>Weather Dashboard</h1>
       {/*form for submiting user searches*/}
       <form onSubmit={handleSearch}>
         <input
@@ -51,7 +63,7 @@ const WeatherDashboard = () => {
           <p>Wind Speed: {weather.wind.speed} m/s</p>
         </div>
       )}
-    </div>
+    </Box>
   );
 };
 
