@@ -1,4 +1,4 @@
-# Weather Dashboard:sun_behind_small_cloud:
+# Weather Dashboard ☁️🌤️🌧️
 
 This is a simple and morden weather dashboard built using **React** , **Material-UI**, and the **OpenWeather API**.The dashboard allows users to search for weather conditions in any city around the world, displaying relevant weather data along with appropriate icons for different weather conditions. I made this app as a simple way to practice fetching data from an API and building intuitive user interfaces that are also interesting to look at.
 
