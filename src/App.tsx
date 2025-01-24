@@ -1,4 +1,5 @@
 import WeatherDashboard from "./WeatherDashboard";
+import "./App.css";
 
 const App = () => {
   return (

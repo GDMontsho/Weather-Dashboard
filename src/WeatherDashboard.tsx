@@ -1,15 +1,26 @@
 import { useState } from "react";
+import {
+  Button,
+  TextField,
+  Typography,
+  CircularProgress,
+  Box,
+} from "@mui/material";
 import { fetchWeatherData } from "./weatherApi";
-import { Box } from "@mui/material";
+
+const getWeatherBackgroundStyle = () => {
+  return {
+    background: "#1A1A58",
+    backgroundSize: "cover",
+  };
+};
 
 const WeatherDashboard = () => {
-  //state for bringing data into our dashboard when user needs it
   const [city, setCity] = useState<string>("");
   const [weather, setWeather] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  //function for user form submission
   const handleSearch = async (event: React.FormEvent) => {
     event.preventDefault();
 
@@ -26,42 +37,133 @@ const WeatherDashboard = () => {
     }
   };
 
+  const weatherStyle = getWeatherBackgroundStyle();
+
   return (
     <Box
       sx={{
+        ...weatherStyle,
         minHeight: "100vh",
-        minWidth: "100vw",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
         alignItems: "center",
-        textAlign: "center",
-        padding: "5px",
+        justifyContent: "center",
+        padding: "20px",
+        color: "#00FFDD",
+        backgroundSize: "cover",
       }}
     >
-      {/*Dashboard header*/}
-      <h1>Weather Dashboard</h1>
-      {/*form for submiting user searches*/}
-      <form onSubmit={handleSearch}>
-        <input
-          type="text"
-          placeholder="Enter City Name"
+      <Typography
+        variant="h3"
+        sx={{
+          marginBottom: "20px",
+          textAlign: "center",
+          textShadow: "0 0 5px #00FFDD, 0 0 10px #00FFDD, 0 0 15px #00FFDD",
+        }}
+      >
+        Weather Dashboard
+      </Typography>
+
+      <form
+        onSubmit={handleSearch}
+        style={{ width: "100%", maxWidth: "400px" }}
+      >
+        <TextField
+          label="Enter city"
+          variant="outlined"
+          fullWidth
           value={city}
           onChange={(e) => setCity(e.target.value)}
+          sx={{
+            marginBottom: "10px",
+            input: {
+              color: "#fff",
+            },
+            fieldset: {
+              borderColor: "#00FFDD",
+            },
+          }}
         />
-        <button type="submit" disabled={loading}>
-          {loading ? "Loading..." : "Search"}
-        </button>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          fullWidth
+          disabled={loading}
+          sx={{
+            backgroundColor: "#4b00b2",
+            "&:hover": { backgroundColor: "#7C3AED" },
+          }}
+        >
+          {loading ? <CircularProgress size={24} color="inherit" /> : "Search"}
+        </Button>
       </form>
-      {error && <p>{error}</p>}
+
+      {error && (
+        <Typography color="error" sx={{ marginTop: "20px", color: "#00FFDD" }}>
+          {error}
+        </Typography>
+      )}
+
       {weather && !error && (
-        <div>
-          <h2>{weather.name}</h2>
-          <p>{weather.weather[0].description}</p>
-          <p>Temperature: {weather.main.temp}°C</p>
-          <p>Humidity: {weather.main.humidity}%</p>
-          <p>Wind Speed: {weather.wind.speed} m/s</p>
-        </div>
+        <Box
+          sx={{
+            backgroundColor: "#ffffff",
+            padding: "20px",
+            borderRadius: "8px",
+            boxShadow: "0 1px 5px rgba(0,0,0,0.1)",
+            marginTop: "20px",
+            width: "80%",
+            maxWidth: "400px",
+            textAlign: "center",
+            background: "rgba(255, 255, 255, 0.8)",
+          }}
+        >
+          <Typography variant="h5" sx={{ color: "#333" }}>
+            {weather.name}
+          </Typography>
+          <Typography variant="body1" sx={{ color: "#333" }}>
+            {weather.weather[0].description}
+          </Typography>
+          <Typography variant="body1" sx={{ color: "#333" }}>
+            Temperature: {weather.main.temp}°C
+          </Typography>
+          <Typography variant="body1" sx={{ color: "#333" }}>
+            Humidity: {weather.main.humidity}%
+          </Typography>
+          <Typography variant="body1" sx={{ color: "#333" }}>
+            Wind Speed: {weather.wind.speed} m/s
+          </Typography>
+
+          {weather.weather[0].description.includes("clear") && (
+            <img
+              src="https://img.icons8.com/ios/452/sun.png"
+              alt="Sun"
+              width={80}
+            />
+          )}
+          {weather.weather[0].description.includes("rain") && (
+            <img
+              src="https://img.icons8.com/ios/452/rain.png"
+              alt="Rain"
+              width={80}
+            />
+          )}
+          {weather.weather[0].description.includes("clouds") && (
+            <img
+              src="https://img.icons8.com/ios/452/cloud.png"
+              alt="Clouds"
+              width={80}
+            />
+          )}
+          {weather.weather[0].description.includes("snow") && (
+            <img
+              src="https://img.icons8.com/ios/452/snow.png"
+              alt="Snow"
+              width={80}
+            />
+          )}
+        </Box>
       )}
     </Box>
   );
