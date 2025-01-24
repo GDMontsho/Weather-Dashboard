@@ -4,7 +4,7 @@ This is a simple and morden weather dashboard built using **React** , **Material
 
 ## Features
 
-- **Search functinality:** Enter any city to get real-time weather data.
+- **Search functionality:** Enter any city to get real-time weather data.
 
 - **Weather conditions:** Displays weather details like, temparature, humidity, wind speed, and weather description.
 
