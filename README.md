@@ -65,7 +65,7 @@ npm start
 
 ## Usage
 
-1. **Search for weather:**ype the name of any city in the input field and press "Search".
+1. **Search for weather:** type the name of any city in the input field and press "Search".
 
 2. **Weather details:** The dashboard will display the current temperature, humidity, wind speed, and description of the weather.
 
