@@ -30,7 +30,27 @@ const WeatherDashboard = () => {
       {/*Dashboard header*/}
       <h1>WeatherDashboard</h1>
       {/*form for submiting user searches*/}
-      <form onSubmit={handleSearch}></form>
+      <form onSubmit={handleSearch}>
+        <input
+          type="text"
+          placeholder="Enter City Name"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+        />
+        <button type="submit" disabled={loading}>
+          {loading ? "Loading..." : "Search"}
+        </button>
+      </form>
+      {error && <p>{error}</p>}
+      {weather && !error && (
+        <div>
+          <h2>{weather.name}</h2>
+          <p>{weather.weather[0].description}</p>
+          <p>Temperature: {weather.main.temp}°C</p>
+          <p>Humidity: {weather.main.humidity}%</p>
+          <p>Wind Speed: {weather.wind.speed} m/s</p>
+        </div>
+      )}
     </div>
   );
 };
